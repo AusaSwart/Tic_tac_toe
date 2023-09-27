@@ -11,16 +11,35 @@ public class Main {
         System.out.println(" Player Two, input ur name:");
         String playerTwo = scanner.nextLine();
 
-        // create board
+        // create board  (step1)
         char [][] board = new char[3][3];
 
-        for (int i = 0; i < 3;i++ ){
-            for (int m = 0; m < 3; m++){
-                board[i][m] = '-';
+        for (int i = 0; i < 3; i++ ){
+            for (int j = 0; j < 3; j++){
+                board[i][j] = '-';
             }
         }
 
+        // here we can see our board (step2)
         System.out.println(" Hello, " + playerOne + " and " + playerTwo);
+        System.out.println(" There's your board ");
+        // how can i do cycle more optimal                (?)
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                System.out.print("\t");
+                System.out.print(" " + board[i][j] + " ");
+                if (j == 2) System.out.println(" ");
+            }
+        }
+
+        // tracking correct symbols (step3)
+
+
+
+        // asking players their step before they are become valid (step4)
+
+
+        //
 
 
     }
