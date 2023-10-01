@@ -43,8 +43,8 @@ public class TicTac {
                 break;
             }
             // machine turn
+            System.out.println(" Machine move");
             playerTwo();
-            drawBoard();
             // check
             if (check(OChar)) {
                 System.out.println(" Player Two Win");
@@ -55,6 +55,7 @@ public class TicTac {
                 break;
             }
         }
+        System.out.println();
         System.out.println(" Game over");
         drawBoard();
     }
@@ -68,15 +69,7 @@ public class TicTac {
             y = scanner.nextInt() - 1;
         } while (!isValidCell(x, y));
         board[x][y] = XChar;
-    }
-
-    // check coordinates of cell, if they are valid
-    private boolean isValidCell(int x, int y) {
-        if (( x < 0 || y < 0 || x >= 3 || y >= 3 ) && board[x][y] != Empty) {
-            System.out.println(" Incorrect coordinates, try again");
-            return false;
-        }
-        return true;
+        drawBoard();
     }
 
     // player two move
@@ -87,7 +80,18 @@ public class TicTac {
             y = random.nextInt(3);
         } while (!isValidCell(x, y));
         board[x][y] = OChar;
+        drawBoard();
     }
+
+    // check coordinates of cell, if they are valid
+    private boolean isValidCell(int x, int y) {
+        if ( x < 0 || y < 0 || x >= 3 || y >= 3 || board[x][y] != Empty) {
+            System.out.println(" Incorrect coordinates, try again");
+            return false;
+        }
+        return true;
+    }
+
 
     // check if board full
     private boolean boardFull() {
