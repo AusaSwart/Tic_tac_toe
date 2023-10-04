@@ -11,11 +11,12 @@ public class TicTac {
     char[][] board;
     Scanner scanner;
     Random random;
+    static int player;
 
     // entrance in program
     public static void main(String[] args) {
         // start game
-        new TicTac().game();
+        new TicTac().game(player);
     }
 
     //constructor
@@ -23,16 +24,22 @@ public class TicTac {
         random = new Random();
         scanner = new Scanner(System.in);
         board = new char[3][3];
+        System.out.println("""
+                             Welcome to the game Tic-Tac-Toe\s
+                             Would you play with machine or another player? (1 or 2)\s
+                             In cause of wrong decision you will be play with machine
+                            """);
+        player = scanner.nextInt();
     }
 
     // game logic
-    void game() {
+    void game( int player ) {
         // init
         initBoard();
         // infinity loop
         while (true) {
             // human turn
-            playerOne();
+            playerOne(XChar);
             // check
             if (check(XChar)) {
                 System.out.println(" Player One Win");
@@ -42,18 +49,34 @@ public class TicTac {
                 System.out.println(" Draw");
                 break;
             }
-            // machine turn
-            System.out.println(" Machine move");
-            playerTwo();
-            // check
-            if (check(OChar)) {
-                System.out.println(" Player Two Win");
-                break;
+            if (player != 2) {
+                // machine turn
+                System.out.println(" Machine move");
+                playerTwo();
+                // check
+                if (check(OChar)) {
+                    System.out.println(" Player Two Win");
+                    break;
+                }
+                if (boardFull()) {
+                    System.out.println(" Draw");
+                    break;
+                }
             }
-            if (boardFull()) {
-                System.out.println(" Draw");
-                break;
+            if ( player == 2) {
+                playerOne(OChar);
+
+                // check
+                if (check(OChar)) {
+                    System.out.println(" Player Two Win");
+                    break;
+                }
+                if (boardFull()) {
+                    System.out.println(" Draw");
+                    break;
+                }
             }
+
         }
         System.out.println();
         System.out.println(" Game over");
@@ -61,14 +84,14 @@ public class TicTac {
     }
 
     // player one move
-    private void playerOne() {
+    private void playerOne( char symbol) {
         int x, y;
         do {
             System.out.println(" Enter x - row & y - cow, coordinates ( 1, 2, 3 ): ");
             x = scanner.nextInt() - 1;
             y = scanner.nextInt() - 1;
         } while (!isValidCell(x, y));
-        board[x][y] = XChar;
+        board[x][y] = symbol;
         drawBoard();
     }
 
